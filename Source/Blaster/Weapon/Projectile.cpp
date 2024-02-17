@@ -65,17 +65,9 @@ void AProjectile::MulticastOnHit_Implementation(FHitResult Hit)
 {
 	if (Hit.GetActor() && Hit.GetActor()->Implements<UInteractWithCrosshairsInterface>())
 	{
-		ABlasterCharacter* BlasterCharacter = Cast<ABlasterCharacter>(Hit.GetActor());
-		if (BlasterCharacter)
+		if (HitCharacterParticles)
 		{
-			BlasterCharacter->PlayHitReactMontage();
-
-			if (HitCharacterParticles)
-			{
-
-				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitCharacterParticles, GetActorLocation(), GetActorRotation());
-			}
-
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitCharacterParticles, GetActorLocation(), GetActorRotation());
 		}
 	}
 	else
@@ -85,8 +77,7 @@ void AProjectile::MulticastOnHit_Implementation(FHitResult Hit)
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), GrassParticles, GetActorLocation());
 		}
 	}
-
-
+	
 	if (ImpactSound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());

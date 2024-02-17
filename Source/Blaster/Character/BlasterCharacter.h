@@ -8,6 +8,7 @@
 #include "Blaster/Interfaces/InteractWithCrosshairsInterface.h"
 #include "BlasterCharacter.generated.h"
 
+class ABlasterPlayerController;
 class UCombatComponent;
 class AWeapon;
 class UWidgetComponent;
@@ -25,12 +26,18 @@ public:
 	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
 	virtual void PostInitializeComponents() override;
+	
 	virtual void OnRep_ReplicatedMovement() override;
 	void PlayFireMontage(bool bAiming);
 	void PlayHitReactMontage();
 	void Calculate_AO_Pitch();
-
+	
+protected:
+	UFUNCTION()
+	void ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* InstigatorController, AActor* DamageCauser);
+	void UpdateHUDHealth();
 protected:
 	virtual void BeginPlay() override;
 	
@@ -54,6 +61,7 @@ protected:
 
 	void FireButtonPressed();
 	void FireButtonReleased();
+	
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
 
@@ -68,6 +76,16 @@ protected:
 private:
 #pragma region components
 	float CalculateSpeed();
+	
+	UPROPERTY(EditAnywhere, Category = "PlayerStats")
+	float MaxHealth = 100.f;
+
+	UPROPERTY(ReplicatedUsing = OnRep_Health, VisibleAnywhere, Category = "PlayerStats")
+	float Health = 100.f;
+	
+	UFUNCTION()
+	void OnRep_Health();
+	
 	float InterAO_Yaw;
 	float AO_Yaw;
 	float AO_Pitch;
@@ -104,6 +122,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UAnimMontage* HitReact;
 	
+	ABlasterPlayerController* BlasterPlayerController;
 #pragma endregion
 	
 	UFUNCTION()
