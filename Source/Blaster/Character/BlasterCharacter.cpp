@@ -11,12 +11,15 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Net/UnrealNetwork.h"
+#include "TimerManager.h"
+#include "Blaster/GameMode/BlasterGameMode.h"
 
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true;
+	SpawnCollisionHandlingMethod = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 	
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetMesh());
@@ -32,6 +35,8 @@ ABlasterCharacter::ABlasterCharacter()
 
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
 	CombatComponent->SetIsReplicated(true);
+
+	DissolveTimelineComponent = CreateDefaultSubobject<UTimelineComponent>("DissolveTimelineComponent");
 	
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetCollisionObjectType(ECC_SkeletalMesh);
@@ -135,14 +140,25 @@ void ABlasterCharacter::OnRep_Health()
 	UpdateHUDHealth();
 }
 
+
 void ABlasterCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
-	AController* InstigatorController, AActor* DamageCauser)
+                                      AController* InstigatorController, AActor* DamageCauser)
 {
 	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
 	PlayHitReactMontage();
 	UpdateHUDHealth();
+	
+	ABlasterGameMode* BlasterGameMode = GetWorld()->GetAuthGameMode<ABlasterGameMode>();
+	if (BlasterGameMode)
+	{
+		if (Health == 0.f)
+		{
+			BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
+			ABlasterPlayerController* AttackerController = Cast<ABlasterPlayerController>(InstigatorController);
+			BlasterGameMode->PlayerEliminated(this, BlasterPlayerController, AttackerController);
+		}
+	}
 }
-
 
 void ABlasterCharacter::MoveForward(float Value)
 {
@@ -212,6 +228,15 @@ void ABlasterCharacter::PlayHitReactMontage()
 	}
 }
 
+void ABlasterCharacter::PlayElimMontage()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && ElimMontage)
+	{
+		AnimInstance->Montage_Play(ElimMontage);
+	}
+}
+
 float ABlasterCharacter::CalculateSpeed()
 {
 	FVector Velocity = GetVelocity();
@@ -229,6 +254,36 @@ void ABlasterCharacter::Calculate_AO_Pitch()
 		FVector2d OutRange(-90.f, 0.f);
 
 		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
+	}
+}
+
+void ABlasterCharacter::Eliminated()
+{
+	MulticastEliminated();
+	GetWorldTimerManager().SetTimer(ElimTimer, this, &ABlasterCharacter::OnElimTimerFinished, ElimDelay);
+}
+
+void ABlasterCharacter::MulticastEliminated_Implementation()
+{
+	bElimmed = true; 
+	PlayElimMontage();
+
+	if (DissolveMaterialInstance)
+	{
+		DynamicDissolveMaterial = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
+		GetMesh()->SetMaterial(0, DynamicDissolveMaterial);
+		DynamicDissolveMaterial->SetScalarParameterValue(TEXT("Dissolve"), 0.55f);
+		DynamicDissolveMaterial->SetScalarParameterValue(TEXT("Glow"), 200.f);
+	}
+	StartDissolve();
+}
+
+void ABlasterCharacter::OnElimTimerFinished()
+{
+	ABlasterGameMode* BlasterGameMode = GetWorld()->GetAuthGameMode<ABlasterGameMode>();
+	if (BlasterGameMode)
+	{
+		BlasterGameMode->RequestRespawn(this, Controller);
 	}
 }
 
@@ -404,6 +459,7 @@ void ABlasterCharacter::ServerEquipButtonPressed_Implementation()
 	}
 }
 
+
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
 {
 	if (OverlappingWeapon)
@@ -448,6 +504,24 @@ void ABlasterCharacter::FireButtonReleased()
 		CombatComponent->FireButtonPressed(false);
 	}
 }
+void ABlasterCharacter::UpdateDissolveMaterial(float Value)
+{
+	if (DynamicDissolveMaterial)
+	{
+		DynamicDissolveMaterial->SetScalarParameterValue(TEXT("Dissolve"), Value);
+	}
+}
+
+void ABlasterCharacter::StartDissolve()
+{
+	DissolveTrack.BindDynamic(this, &ABlasterCharacter::UpdateDissolveMaterial);
+	if (DissolveCurveFloat && DissolveTimelineComponent)
+	{
+		DissolveTimelineComponent->AddInterpFloat(DissolveCurveFloat, DissolveTrack);
+		DissolveTimelineComponent->Play();
+	}
+}
+
 
 bool ABlasterCharacter::IsWeaponEquipped()
 {

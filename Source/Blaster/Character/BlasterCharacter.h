@@ -6,8 +6,10 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Blaster/Interfaces/InteractWithCrosshairsInterface.h"
+#include  "Components/TimelineComponent.h"
 #include "BlasterCharacter.generated.h"
 
+class UTimelineComponent;
 class ABlasterPlayerController;
 class UCombatComponent;
 class AWeapon;
@@ -23,16 +25,20 @@ class BLASTER_API ABlasterCharacter : public ACharacter, public IInteractWithCro
 public:
 	ABlasterCharacter();
 	virtual void Tick(float DeltaTime) override;
-	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-	
 	virtual void PostInitializeComponents() override;
-	
 	virtual void OnRep_ReplicatedMovement() override;
+	
 	void PlayFireMontage(bool bAiming);
 	void PlayHitReactMontage();
+	void PlayElimMontage();
 	void Calculate_AO_Pitch();
+	
+	UFUNCTION(Reliable, NetMulticast)
+	void MulticastEliminated();
+	
+	void Eliminated();
 	
 protected:
 	UFUNCTION()
@@ -90,6 +96,7 @@ private:
 	float AO_Yaw;
 	float AO_Pitch;
 	bool bRotateRootBone;
+	bool bElimmed = false;
 	float ProxyYaw;
 	float TurnThreshold = .5f;
 	float TimeSinceLastMovementReplication;
@@ -121,8 +128,40 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UAnimMontage* HitReact;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	UAnimMontage* ElimMontage;
 	
 	ABlasterPlayerController* BlasterPlayerController;
+
+	FTimerHandle ElimTimer;
+	void OnElimTimerFinished();
+	
+	UPROPERTY(EditDefaultsOnly)
+	float ElimDelay = 3.f;
+
+	/*
+	 * Dissolve Effect
+	 */
+
+	UPROPERTY(VisibleAnywhere)
+	UTimelineComponent* DissolveTimelineComponent;
+
+	UPROPERTY(EditAnywhere)
+	UCurveFloat* DissolveCurveFloat;
+	
+	UPROPERTY(VisibleAnywhere, Category = Elim)
+	UMaterialInstanceDynamic* DynamicDissolveMaterial;
+
+	UPROPERTY(EditAnywhere, Category = Elim)
+	UMaterialInstance* DissolveMaterialInstance;
+	
+	FOnTimelineFloat DissolveTrack;
+
+	UFUNCTION()
+	void UpdateDissolveMaterial(float Value);
+	
+	void StartDissolve();
 #pragma endregion
 	
 	UFUNCTION()
@@ -141,4 +180,5 @@ public:
 	FVector GetHitTarget() const ;
 	FORCEINLINE UCameraComponent* GetCameraComponent() { return FollowCamera; }
 	FORCEINLINE bool ShouldRotateRootBone() { return bRotateRootBone; }
+	FORCEINLINE bool IsElimmed() const { return bElimmed; }
 };
