@@ -67,7 +67,7 @@ void AProjectile::MulticastOnHit_Implementation(FHitResult Hit)
 	{
 		if (HitCharacterParticles)
 		{
-			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitCharacterParticles, GetActorLocation(), GetActorRotation());
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitCharacterParticles, GetActorLocation(), GetActorRotation(), FVector(0.5f));
 		}
 	}
 	else

@@ -9,6 +9,7 @@
 #include  "Components/TimelineComponent.h"
 #include "BlasterCharacter.generated.h"
 
+class USoundCue;
 class UTimelineComponent;
 class ABlasterPlayerController;
 class UCombatComponent;
@@ -29,7 +30,7 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
 	virtual void OnRep_ReplicatedMovement() override;
-	
+	virtual void Destroyed() override;
 	void PlayFireMontage(bool bAiming);
 	void PlayHitReactMontage();
 	void PlayElimMontage();
@@ -162,6 +163,20 @@ private:
 	void UpdateDissolveMaterial(float Value);
 	
 	void StartDissolve();
+
+	/*
+	 * ElimBot 
+	 */
+	
+	UPROPERTY(EditAnywhere, Category = Elim)
+	UParticleSystem* ElimBotEffect;
+
+	UPROPERTY(VisibleAnywhere)
+	UParticleSystemComponent* ElimBotComponent;
+
+	UPROPERTY(EditAnywhere, Category = Elim)
+	USoundCue* ElimBotSound;
+	
 #pragma endregion
 	
 	UFUNCTION()

@@ -37,7 +37,7 @@ public:
 
 	UFUNCTION()
 	void OnRep_WeaponState();
-
+	void Dropped();
 	// Textures for weapon crosshairs
 
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
