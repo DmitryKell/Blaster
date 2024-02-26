@@ -9,6 +9,7 @@
 #include  "Components/TimelineComponent.h"
 #include "BlasterCharacter.generated.h"
 
+class ABlasterPlayerState;
 class USoundCue;
 class UTimelineComponent;
 class ABlasterPlayerController;
@@ -45,6 +46,8 @@ protected:
 	UFUNCTION()
 	void ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* InstigatorController, AActor* DamageCauser);
 	void UpdateHUDHealth();
+	// Poll for any relevant classes 
+	void PollInit();
 protected:
 	virtual void BeginPlay() override;
 	
@@ -132,7 +135,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UAnimMontage* ElimMontage;
-	
+
+	UPROPERTY()
 	ABlasterPlayerController* BlasterPlayerController;
 
 	FTimerHandle ElimTimer;
@@ -176,12 +180,14 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Elim)
 	USoundCue* ElimBotSound;
-	
+
+	UPROPERTY()
+	ABlasterPlayerState* BlasterPlayerState;
 #pragma endregion
+	
 	
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
-	
 public:
 	 void SetOverlappingItem(AWeapon* Weapon);
 	 bool IsWeaponEquipped();
@@ -196,4 +202,6 @@ public:
 	FORCEINLINE UCameraComponent* GetCameraComponent() { return FollowCamera; }
 	FORCEINLINE bool ShouldRotateRootBone() { return bRotateRootBone; }
 	FORCEINLINE bool IsElimmed() const { return bElimmed; }
+	FORCEINLINE float GetHealth() const {return Health;}
+	FORCEINLINE float GetMaxHealth() const {return MaxHealth;}
 };

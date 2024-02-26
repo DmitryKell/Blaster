@@ -32,12 +32,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	void ShowPickupWidget(bool bShowWidget);
-
+	virtual void OnRep_Owner() override;
 	virtual void Fire(const FVector& HitTarget);
 
 	UFUNCTION()
 	void OnRep_WeaponState();
 	void Dropped();
+
+	void UpdateWeaponAmmoHUD();
 	// Textures for weapon crosshairs
 
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
@@ -58,6 +60,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = Crosshairs)
 	UTexture2D* CrosshairsBottom;
 
+	
 protected:
 	virtual void BeginPlay() override;
 
@@ -86,7 +89,31 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	TSubclassOf<ACasing> BulletCasing;
+	
+	UPROPERTY()
+	class ABlasterCharacter* BlasterOwnerCharacter;
 
+	UPROPERTY()
+	class ABlasterPlayerController* BlasterPlayerController;
+
+	UPROPERTY(EditAnywhere, Replicated, ReplicatedUsing = OnRep_Ammo)
+	int32 Ammo;
+	
+	UPROPERTY()
+	ABlasterCharacter* OwnerCharacter;
+	
+	UPROPERTY()
+	ABlasterPlayerController* OwnerPlayerController;
+	
+	UFUNCTION()
+	void OnRep_Ammo();
+
+	void SpendRound();
+	
+
+	UPROPERTY(EditAnywhere)
+	int32 MagCapacity;
+	
 	// Zoomed FOV
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	float ZoomedFOV = 30.f;
@@ -99,6 +126,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	bool bAutomaticFire = true;
+
+	
 #pragma endregion
 
 public:

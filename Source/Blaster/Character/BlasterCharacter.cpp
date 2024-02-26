@@ -15,6 +15,7 @@
 #include "Sound/SoundCue.h"
 #include "Blaster/GameMode/BlasterGameMode.h"
 #include "Kismet/GameplayStatics.h"
+#include  "Blaster/PlayerState/BlasterPlayerState.h"
 #include "Particles/ParticleSystemComponent.h"
 
 ABlasterCharacter::ABlasterCharacter()
@@ -71,6 +72,20 @@ void ABlasterCharacter::UpdateHUDHealth()
 	}
 }
 
+void ABlasterCharacter::PollInit()
+{
+	if (BlasterPlayerState == nullptr)
+	{
+		BlasterPlayerState = GetPlayerState<ABlasterPlayerState>();
+		if (BlasterPlayerState)
+		{
+			BlasterPlayerState->AddToScore(0.f);
+			BlasterPlayerState->AddToDefeats(0);
+			BlasterPlayerState->AddElimText("");
+		}
+	}
+}
+
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -98,6 +113,7 @@ void ABlasterCharacter::Tick(float DeltaTime)
 		Calculate_AO_Pitch();
 	}
 	HideCharacterIfCharacterClose();
+	PollInit();
 }
 
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -199,6 +215,7 @@ void ABlasterCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const 
 		if (Health == 0.f)
 		{
 			BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
+			
 			ABlasterPlayerController* AttackerController = Cast<ABlasterPlayerController>(InstigatorController);
 			BlasterGameMode->PlayerEliminated(this, BlasterPlayerController, AttackerController);
 		}
@@ -217,6 +234,10 @@ void ABlasterCharacter::Eliminated()
 
 void ABlasterCharacter::MulticastEliminated_Implementation()
 {
+	if (BlasterPlayerController)
+	{
+		BlasterPlayerController->SetHUDWeaponAmmo(0.f);
+	}
 	bElimmed = true; 
 	PlayElimMontage();
 	// Start Dissolve Effect

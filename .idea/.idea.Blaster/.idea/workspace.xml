@@ -8,75 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38cf7813-65dc-4222-8b1b-fa81f31d7958" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Flares/M_Lensflare_TB_Soft.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Flares/M_Lensflare_TB_SoftGlow.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Flares/M_Lensflare_TB_SoftGlow_LowDepth_Inst.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/FX_EmissiveModulate.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/FadeBasedOnViewAngle.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/HitFlash.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MF_BaseColorTintAndContrast.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MF_BrightnessAdjust.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MF_CharacterEffects.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MF_DeathFade.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MF_OrionCharacterAO.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MF_RoughnessAdjustment.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MLC_ScratchAndGrime.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/MLC_Standard.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Functions/ML__Blank.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/MF_OrionRimlight.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/ML_Chrome.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/ML_Dirty_Gun_Metal_1.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/ML_GlossyBlack_Latex.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/ML_PurplePattern.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/ML_White_shinyPaint.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/ML_blue_Metal.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Hero_Specific/M_Dekker_Weapon_Bot.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Param_Collections/GlobalGameplayCollection.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Tech/M_Spline_Light_Scanner.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Materials/Trails/M_Bullet_Trail.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Meshes/Bots/SM_Dekker_BotFriend.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Meshes/Shapes/SM_Holo_Projector_Beams.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Particles/Abilities/Cage/FX/P_Bot_Cage.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Flares/T_Flare_Spikeball.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Gradients/Color/T_Muriel_Prism_03.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Blank_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Blue_Metal02.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Dekker_UV2_RGB.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Dekker_Weapon_M.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Dekker_Weapon_M2.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Dekker_Weapon_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Dekker_Weapon_RGB.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_ML_PaintedConstructionMetal_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_ML_PlasticPattern01.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_ML_PlasticPattern01_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_ML_Rubber_Blue_01_D.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_ML_Rubber_Blue_01_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Rough_Plastic_D.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_Rough_Plastic_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Hero_Specific/T_metal02.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Masks/T_Beam_Gradient_02.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Masks/T_SmokeTrailCoord1_Mask.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Masks/T_Square_SoftEdges.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Tile/Noise/T_AtmosphericCloudNoise01.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Tile/Noise/T_AtmosphericCloudNoise01_N.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Tile/Noise/T_AtmosphericCloudNoise03.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Textures/Tile/T_TestML_Mask.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Sounds/ElimBot/ElimBot_Att.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Sounds/ElimBot/Robot_1.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Sounds/ElimBot/Robot_1_Cue.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/PlayerState/BP_BlasterPlayerState.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Blaster/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Blaster/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Curves/DissolveCurve.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Curves/DissolveCurve.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Realistic_Starter_VFX_Pack_Vol2/Maps/Overview_Map_Night.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Realistic_Starter_VFX_Pack_Vol2/Maps/Overview_Map_Night.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Realistic_Starter_VFX_Pack_Vol2/Particles/Destruction/P_Destruction_Electric.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Realistic_Starter_VFX_Pack_Vol2/Particles/Destruction/P_Destruction_Electric.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Character/Animations/ABP_Blaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Character/Animations/ABP_Blaster.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Character/BP_BlasterCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Character/BP_BlasterCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileBullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileBullet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Particles/Abilities/Cage/FX/P_Bot_Cage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/ParagonDekker/FX/Particles/Abilities/Cage/FX/P_Bot_Cage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/GameModes/BP_BlasterGameModa.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/GameModes/BP_BlasterGameModa.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/HUD/WBP_CharacterOverlay.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/HUD/WBP_CharacterOverlay.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_AssaultRifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_AssaultRifle.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BlasterMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BlasterMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Prototype/Undertale.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Prototype/Undertale.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/GameMode/BlasterGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/GameMode/BlasterGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/HUD/BlasterHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/HUD/BlasterHUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/HUD/CharacterOverlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/HUD/CharacterOverlay.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/PlayerController/BlasterPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/PlayerController/BlasterPlayerController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/PlayerController/BlasterPlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/PlayerController/BlasterPlayerController.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.h" afterDir="false" />
     </list>
@@ -205,7 +151,13 @@
       <workItem from="1708621993607" duration="1480000" />
       <workItem from="1708625767218" duration="2320000" />
       <workItem from="1708672209022" duration="706000" />
-      <workItem from="1708674035953" duration="1775000" />
+      <workItem from="1708674035953" duration="4817000" />
+      <workItem from="1708689554619" duration="2928000" />
+      <workItem from="1708762144318" duration="782000" />
+      <workItem from="1708799926869" duration="5035000" />
+      <workItem from="1708941896631" duration="9512000" />
+      <workItem from="1708954747296" duration="522000" />
+      <workItem from="1708959156128" duration="3359000" />
     </task>
     <servers />
   </component>

@@ -10,6 +10,8 @@
 #include "Engine/SkeletalMeshSocket.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Blaster/Character/BlasterCharacter.h"
+#include "Blaster/PlayerController/BlasterPlayerController.h"
 #include "Net/UnrealNetwork.h"
 
 AWeapon::AWeapon()
@@ -63,6 +65,43 @@ void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AWeapon, WeaponState);
+	DOREPLIFETIME(AWeapon, Ammo);
+}
+
+void AWeapon::SpendRound()
+{
+	Ammo--;
+	UpdateWeaponAmmoHUD();
+}
+
+void AWeapon::UpdateWeaponAmmoHUD()
+{
+	BlasterOwnerCharacter = BlasterOwnerCharacter == nullptr ? Cast<ABlasterCharacter>(GetOwner()) : BlasterOwnerCharacter;
+	
+	if (BlasterOwnerCharacter)
+	{
+		OwnerPlayerController = OwnerPlayerController == nullptr ? Cast<ABlasterPlayerController>(BlasterOwnerCharacter->Controller) : OwnerPlayerController;
+		if (OwnerPlayerController)
+		{
+			OwnerPlayerController->SetHUDWeaponAmmo(Ammo);
+		}
+	}
+}
+
+void AWeapon::OnRep_Ammo()
+{
+	UpdateWeaponAmmoHUD();
+}
+
+void AWeapon::OnRep_Owner()
+{
+	Super::OnRep_Owner();
+	if (Owner == nullptr)
+	{
+		BlasterOwnerCharacter = nullptr;
+		BlasterPlayerController = nullptr;
+	}
+	UpdateWeaponAmmoHUD();
 }
 
 void AWeapon::SetWeaponState(EWeaponState State)
@@ -119,6 +158,8 @@ void AWeapon::Dropped()
 	// DetachFromComponent is already replicated like AttachToComponent
 	WeaponMesh->DetachFromComponent(DetachmentTransformRules);
 	SetOwner(nullptr);
+	BlasterOwnerCharacter = nullptr;
+	OwnerPlayerController = nullptr;
 }
 
 void AWeapon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -151,12 +192,15 @@ void AWeapon::ShowPickupWidget(bool bShowWidget)
 	}
 }
 
+
+
 void AWeapon::Fire(const FVector& HitTarget)
 {
 	if (FireAnimation && WeaponMesh)
 	{
 		WeaponMesh->PlayAnimation(FireAnimation, false);
 	}
+	
 	if (BulletCasing)
 	{
 		const USkeletalMeshSocket* AmmoEjectSocket = WeaponMesh->GetSocketByName(FName("AmmoEject"));
@@ -171,6 +215,7 @@ void AWeapon::Fire(const FVector& HitTarget)
 			}
 		}
 	}
+	SpendRound();
 }
 
 
