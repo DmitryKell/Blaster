@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Blaster/HUD/BlasterHUD.h"
+#include "Blaster/Weapon/WeaponTypes.h"
 #include "CombatComponent.generated.h"
 
 #define TRACE_LENGHT 80000.f
@@ -23,6 +24,7 @@ public:
 	friend class ABlasterCharacter;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	void Reload();
 	
 	void EquipWeapon(AWeapon* WeaponToEquip);
 	UFUNCTION()
@@ -30,6 +32,9 @@ public:
 	
 protected:
 	virtual void BeginPlay() override;
+	
+	UFUNCTION(Server, Reliable)
+	void ServerReload();
 	
 	void SetAiming(bool bIsAiming);
 	void FireButtonPressed(bool bPressed);
@@ -53,8 +58,13 @@ private:
 	bool bFireButtonPressed;
 	bool bShrinkWhenAimingAtCharacter;
 
+	UPROPERTY()
 	ABlasterPlayerController* BlasterPlayerController;
+
+	UPROPERTY()
 	ABlasterHUD* BlasterHUD;
+
+	UPROPERTY()
 	ABlasterCharacter* Character;
 	
 	UPROPERTY(Replicated, ReplicatedUsing=OnRep_Weapon)
@@ -100,7 +110,22 @@ private:
 	FTimerHandle FireTimer;
 	
 	bool bCanFire = true;
+	bool CanFire();
 	void Fire();
 	void FireTimerFinished();
 	void StartFireTimer();
+
+	// Carried Ammo for currently equipped weapon
+	UPROPERTY(ReplicatedUsing = OnRep_CarriedAmmo)
+	int32 CarriedAmmo;
+
+	TMap<EWeaponType, int32> CarriedAmmoMap;
+
+	UPROPERTY(EditAnywhere, Category = StartingAmmo)
+	int32 StartingAR_Ammo = 90;
+	
+	void InitializeCarriedAmmo();
+	
+	UFUNCTION()
+	void OnRep_CarriedAmmo();
 };

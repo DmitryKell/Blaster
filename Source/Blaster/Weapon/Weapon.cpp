@@ -70,7 +70,7 @@ void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 
 void AWeapon::SpendRound()
 {
-	Ammo--;
+	Ammo = FMath::Clamp(Ammo - 1, 0, MagCapacity);
 	UpdateWeaponAmmoHUD();
 }
 
@@ -218,4 +218,7 @@ void AWeapon::Fire(const FVector& HitTarget)
 	SpendRound();
 }
 
-
+bool AWeapon::IsEmpty()
+{
+	return Ammo <= 0;
+}

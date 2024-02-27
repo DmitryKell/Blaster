@@ -35,6 +35,8 @@ public:
 	void PlayFireMontage(bool bAiming);
 	void PlayHitReactMontage();
 	void PlayElimMontage();
+	void PlayReloadMontage();
+	
 	void Calculate_AO_Pitch();
 	
 	UFUNCTION(Reliable, NetMulticast)
@@ -71,7 +73,7 @@ protected:
 
 	void FireButtonPressed();
 	void FireButtonReleased();
-	
+	void ReloadButtonPressed();
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
 
@@ -127,6 +129,10 @@ private:
 
 	ETurningInPlace TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 
+	/*
+	 * Montages
+	 */
+	
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UAnimMontage* FireWeaponMontage;
 
@@ -136,9 +142,16 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UAnimMontage* ElimMontage;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	UAnimMontage* ReloadMontage;
+	
+	/*
+	 * Montages
+	 */
+	
 	UPROPERTY()
 	ABlasterPlayerController* BlasterPlayerController;
-
+	
 	FTimerHandle ElimTimer;
 	void OnElimTimerFinished();
 	

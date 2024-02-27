@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Blaster/Weapon/WeaponTypes.h"
 #include "Weapon.generated.h"
 
 class ACasing;
@@ -127,6 +128,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	bool bAutomaticFire = true;
 
+	UPROPERTY(EditAnywhere)
+	EWeaponType WeaponType;
 	
 #pragma endregion
 
@@ -141,6 +144,8 @@ public:
 	FORCEINLINE float GetCrosshairShootFactor() const { return CrosshairShootFactor; }
 
 	FORCEINLINE float GetFireFrequency() const { return FireFrequency; }
-
 	FORCEINLINE bool GetbAutomatic() const { return bAutomaticFire; }
+	
+	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+	bool IsEmpty();
 };
