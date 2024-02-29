@@ -76,6 +76,21 @@ void ABlasterPlayerState::OnRep_Defeats()
 		if (Controller)
 		{
 			Controller->SetHUDDefeats(Defeats);
+			// Replicate WeaponType to clients when defeat
+			Controller->SetWeaponTypeText("");
+		}
+	}
+}
+
+void ABlasterPlayerState::AddWeaponTypeText(FString Text)
+{
+	Character = Character == nullptr ? Cast<ABlasterCharacter>(GetPawn()) : Character;
+	if (Character)
+	{
+		Controller = Controller == nullptr ? Cast<ABlasterPlayerController>(Character->Controller) : Controller;
+		if (Controller)
+		{
+			Controller->SetWeaponTypeText(Text);
 		}
 	}
 }

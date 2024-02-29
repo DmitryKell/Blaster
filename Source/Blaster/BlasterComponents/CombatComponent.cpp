@@ -13,6 +13,7 @@
 #include "Blaster/HUD/BlasterHUD.h"
 #include "Camera/CameraComponent.h"
 #include "Engine/Texture2D.h"
+#include "Sound/SoundCue.h"
 #include "TimerManager.h"
 
 UCombatComponent::UCombatComponent()
@@ -61,8 +62,13 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UCombatComponent, EquippedWeapon)
 	DOREPLIFETIME(UCombatComponent, bAiming)
 	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedAmmo, COND_OwnerOnly);
+	DOREPLIFETIME(UCombatComponent, CombatState)
 }
 
+void UCombatComponent::InitializeCarriedAmmo()
+{
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_AssaultRifle, StartingAR_Ammo);
+}
 
 void UCombatComponent::InterpFOV(float DeltaTime)
 {
@@ -80,7 +86,6 @@ void UCombatComponent::InterpFOV(float DeltaTime)
 	{
 		Character->GetCameraComponent()->SetFieldOfView(CurrentFOV);
 	}
-	
 }
 
 void UCombatComponent::SetHUDCrosshairs(float DeltaTime)
@@ -235,10 +240,23 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	}
 	
 	BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Character->Controller) : BlasterPlayerController;
-	if (BlasterPlayerController)
+	if (BlasterPlayerController && EquippedWeapon)
 	{
 		BlasterPlayerController->SetHUDCarriedAmmo(CarriedAmmo);
+		// Sets on Server
+		FString WeaponTypeText = GetNameOfWeaponType(EquippedWeapon->GetWeaponType());
+		BlasterPlayerController->SetWeaponTypeText(WeaponTypeText);
 	}
+	// on server
+	if (EquippedWeapon && EquippedWeapon->EquipSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), EquippedWeapon->EquipSound, Character->GetActorLocation());
+	}
+	if (EquippedWeapon->IsEmpty())
+	{
+		Reload();
+	}
+	
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
 }
@@ -254,6 +272,19 @@ void UCombatComponent::OnRep_Weapon()
 		{
 			HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
 		}
+		// replicate to clients
+		if (EquippedWeapon->EquipSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(GetWorld(), EquippedWeapon->EquipSound, Character->GetActorLocation());
+		}
+		
+		// sets on clients
+		if (BlasterPlayerController)
+		{
+			FString WeaponTypeText = GetNameOfWeaponType(EquippedWeapon->GetWeaponType());
+			BlasterPlayerController->SetWeaponTypeText(WeaponTypeText);
+		}
+		
 		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 		Character->bUseControllerRotationYaw = true;
 	}
@@ -320,6 +351,10 @@ void UCombatComponent::FireTimerFinished()
 	{
 		Fire();
 	}
+	if (EquippedWeapon->IsEmpty())
+	{
+		Reload();
+	}
 }
 
 
@@ -341,7 +376,7 @@ void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize& T
 bool UCombatComponent::CanFire()
 {
 	if (EquippedWeapon == nullptr) return false;
-	return !EquippedWeapon->IsEmpty() || !bCanFire;
+	return !EquippedWeapon->IsEmpty() && bCanFire && CombatState == ECombatState::ECS_Unoccupied;
 }
 
 void UCombatComponent::OnRep_CarriedAmmo()
@@ -355,19 +390,101 @@ void UCombatComponent::OnRep_CarriedAmmo()
 
 void UCombatComponent::Reload()
 {
-	if (CarriedAmmo > 0)
+	if (CarriedAmmo > 0 && CombatState != ECombatState::ECS_Reloading && EquippedWeapon && EquippedWeapon->GetAmmo() != EquippedWeapon->GetMagCapacity())
 	{
 		ServerReload();
 	}
 }
-void UCombatComponent::ServerReload_Implementation()
+void UCombatComponent::HandleReload()
 {
-	if (Character == nullptr) return;
 	Character->PlayReloadMontage();
 }
 
-void UCombatComponent::InitializeCarriedAmmo()
+void UCombatComponent::ServerReload_Implementation()
 {
-	CarriedAmmoMap.Emplace(EWeaponType::EWT_AssaultRifle, StartingAR_Ammo);
+	if (Character == nullptr && EquippedWeapon == nullptr) return;
+	// Called on Server
+	CombatState = ECombatState::ECS_Reloading;
+
+	HandleReload();
 }
 
+void UCombatComponent::OnRep_CombatState()
+{
+	switch (CombatState)
+	{
+	case ECombatState::ECS_Reloading:
+		// Called on Clients
+		HandleReload();
+		break;
+	case ECombatState::ECS_Unoccupied:
+		if (bFireButtonPressed)
+		{
+			// Called on Clients
+			Fire();
+		}
+		break;
+	}
+}
+
+
+void UCombatComponent::FinishReloading()
+{
+	if (Character == nullptr) return;
+	
+	if ( Character->HasAuthority())
+	{
+		CombatState = ECombatState::ECS_Unoccupied;
+	}
+	if (bFireButtonPressed)
+	{
+		// called on server
+		Fire();
+	}
+}
+
+int32 UCombatComponent::AmountToReload()
+{
+	if (EquippedWeapon == nullptr) return 0;
+	int32 RoomInMag;
+	RoomInMag = EquippedWeapon->GetMagCapacity() - EquippedWeapon->GetAmmo();
+
+	if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+	{
+		int32 AmountCarried = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+		int32 Least = FMath::Min(RoomInMag, AmountCarried);
+		return FMath::Clamp(RoomInMag, 0, Least);
+	}
+	return 0;
+}
+
+void UCombatComponent::UpdateAmmoValues()
+{
+	if (Character == nullptr && EquippedWeapon == nullptr) return;
+	
+	int32 ReloadAmount = AmountToReload();
+	if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+	{
+		CarriedAmmoMap[EquippedWeapon->GetWeaponType()] -= ReloadAmount;
+		CarriedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+	}
+	BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Character->Controller) : BlasterPlayerController;
+	if (BlasterPlayerController)
+	{
+		BlasterPlayerController->SetHUDCarriedAmmo(CarriedAmmo);
+	}
+	
+	EquippedWeapon->AddAmmo(-ReloadAmount);
+}
+
+FString UCombatComponent::GetNameOfWeaponType(EWeaponType WeaponType)
+{
+	FString Text;
+	switch (WeaponType)
+	{
+	case EWeaponType::EWT_AssaultRifle:
+		Text = "AssaultRifle";
+		return Text;
+	}
+	return "";
+}

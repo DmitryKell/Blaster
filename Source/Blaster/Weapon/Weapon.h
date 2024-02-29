@@ -7,6 +7,7 @@
 #include "Blaster/Weapon/WeaponTypes.h"
 #include "Weapon.generated.h"
 
+class USoundCue;
 class ACasing;
 class USphereComponent;
 class UWidgetComponent;
@@ -41,6 +42,11 @@ public:
 	void Dropped();
 
 	void UpdateWeaponAmmoHUD();
+
+	void AddAmmo(int32 AmmoAmount);
+
+	UPROPERTY(EditAnywhere)
+	USoundCue* EquipSound;
 	// Textures for weapon crosshairs
 
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
@@ -131,6 +137,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	EWeaponType WeaponType;
 	
+
 #pragma endregion
 
 public:
@@ -145,6 +152,9 @@ public:
 
 	FORCEINLINE float GetFireFrequency() const { return FireFrequency; }
 	FORCEINLINE bool GetbAutomatic() const { return bAutomaticFire; }
+	
+	FORCEINLINE int32 GetAmmo() const { return Ammo; }
+	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
 	
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 	bool IsEmpty();

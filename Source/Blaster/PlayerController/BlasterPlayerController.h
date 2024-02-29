@@ -17,6 +17,7 @@ public:
 	void SetHUDElimText(FString Text);
 	void SetHUDWeaponAmmo(int32 WeaponAmmo);
 	void SetHUDCarriedAmmo(int32 CarriedAmmo);
+	void SetWeaponTypeText(FString Text);
 	virtual void OnPossess(APawn* InPawn) override;
 protected:
 	

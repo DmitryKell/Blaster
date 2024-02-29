@@ -2,6 +2,7 @@
 
 #include "BlasterAnimInstance.h"
 #include "BlasterCharacter.h"
+#include "Blaster/BlasterTypes/CombatState.h"
 #include "Blaster/Weapon/Weapon.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -37,6 +38,9 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bRotateRootBone = BlasterCharacter->ShouldRotateRootBone();
 	bAiming = BlasterCharacter->IsAiming();
 	bElimmed = BlasterCharacter->IsElimmed();
+	bUseFABRIK = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading;
+	bUseAimOffsets = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading;
+	bTransformRightHand = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading;
 	
 	// Offset Yaw for Strafing
 	FRotator AimRotation = BlasterCharacter->GetBaseAimRotation();

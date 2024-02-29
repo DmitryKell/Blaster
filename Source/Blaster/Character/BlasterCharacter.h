@@ -9,6 +9,7 @@
 #include  "Components/TimelineComponent.h"
 #include "BlasterCharacter.generated.h"
 
+enum class ECombatState : uint8;
 class ABlasterPlayerState;
 class USoundCue;
 class UTimelineComponent;
@@ -122,7 +123,7 @@ private:
 	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
 	AWeapon* OverlappingWeapon;
 
-	UPROPERTY(VisibleAnywhere, Category = Camera )
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UCombatComponent* CombatComponent;
 	
 	FRotator StartingAimRotation;
@@ -217,4 +218,5 @@ public:
 	FORCEINLINE bool IsElimmed() const { return bElimmed; }
 	FORCEINLINE float GetHealth() const {return Health;}
 	FORCEINLINE float GetMaxHealth() const {return MaxHealth;}
+	ECombatState GetCombatState() const;
 };

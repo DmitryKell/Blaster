@@ -88,6 +88,12 @@ void AWeapon::UpdateWeaponAmmoHUD()
 	}
 }
 
+void AWeapon::AddAmmo(int32 AmmoAmount)
+{
+	Ammo = FMath::Clamp(Ammo - AmmoAmount, 0, MagCapacity);
+	UpdateWeaponAmmoHUD();
+}
+
 void AWeapon::OnRep_Ammo()
 {
 	UpdateWeaponAmmoHUD();

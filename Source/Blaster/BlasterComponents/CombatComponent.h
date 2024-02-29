@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Blaster/HUD/BlasterHUD.h"
 #include "Blaster/Weapon/WeaponTypes.h"
+#include  "Blaster/BlasterTypes/CombatState.h"
 #include "CombatComponent.generated.h"
 
 #define TRACE_LENGHT 80000.f
@@ -30,11 +31,18 @@ public:
 	UFUNCTION()
 	void OnRep_Weapon();
 	
+	UFUNCTION(BlueprintCallable)
+	void FinishReloading();
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateAmmoValues();
 protected:
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(Server, Reliable)
 	void ServerReload();
+	
+	void HandleReload();
 	
 	void SetAiming(bool bIsAiming);
 	void FireButtonPressed(bool bPressed);
@@ -114,18 +122,28 @@ private:
 	void Fire();
 	void FireTimerFinished();
 	void StartFireTimer();
-
+	
 	// Carried Ammo for currently equipped weapon
 	UPROPERTY(ReplicatedUsing = OnRep_CarriedAmmo)
 	int32 CarriedAmmo;
-
+	
+	UFUNCTION()
+	void OnRep_CarriedAmmo();
+	
 	TMap<EWeaponType, int32> CarriedAmmoMap;
 
 	UPROPERTY(EditAnywhere, Category = StartingAmmo)
 	int32 StartingAR_Ammo = 90;
 	
 	void InitializeCarriedAmmo();
-	
+
+	UPROPERTY(ReplicatedUsing = OnRep_CombatState)
+	ECombatState CombatState = ECombatState::ECS_Unoccupied;
+
 	UFUNCTION()
-	void OnRep_CarriedAmmo();
+	void OnRep_CombatState();
+
+	int32 AmountToReload();
+	
+	FString GetNameOfWeaponType(EWeaponType WeaponType);
 };

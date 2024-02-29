@@ -29,6 +29,7 @@ public:
 	void AddToScore(float ScoreAmount);
 	void AddToDefeats(int32 DefeatsAmount);
 	void AddElimText(FString Text);
+	void AddWeaponTypeText(FString Text);
 private:
 	UPROPERTY()
 	ABlasterCharacter* Character;

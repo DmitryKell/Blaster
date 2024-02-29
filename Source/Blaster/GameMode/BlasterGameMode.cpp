@@ -22,6 +22,8 @@ ABlasterPlayerController* VictimController, ABlasterPlayerController* AttackerCo
 	{
 		VictimBlasterPlayerState->AddToDefeats(1);
 		VictimBlasterPlayerState->AddElimText("You Were Eliminated!");
+		// Sets on server
+		VictimBlasterPlayerState->AddWeaponTypeText("");
 	}
 	
 	if (EliminatedCharacter)
