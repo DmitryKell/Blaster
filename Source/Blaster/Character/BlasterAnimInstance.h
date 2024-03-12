@@ -81,5 +81,6 @@ private:
 	
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	bool bTransformRightHand;
-	
+
+	bool bGameplayDisabled; 
 };

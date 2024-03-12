@@ -36,6 +36,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateAmmoValues();
+
+	void FireButtonPressed(bool bPressed);
 protected:
 	virtual void BeginPlay() override;
 	
@@ -45,7 +47,7 @@ protected:
 	void HandleReload();
 	
 	void SetAiming(bool bIsAiming);
-	void FireButtonPressed(bool bPressed);
+	
 	
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);

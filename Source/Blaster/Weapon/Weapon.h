@@ -103,7 +103,7 @@ private:
 	UPROPERTY()
 	class ABlasterPlayerController* BlasterPlayerController;
 
-	UPROPERTY(EditAnywhere, Replicated, ReplicatedUsing = OnRep_Ammo)
+	UPROPERTY(EditAnywhere, Replicated, ReplicatedUsing = OnRep_Ammo, Category = WeaponProperties)
 	int32 Ammo;
 	
 	UPROPERTY()
@@ -117,8 +117,7 @@ private:
 
 	void SpendRound();
 	
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	int32 MagCapacity;
 	
 	// Zoomed FOV

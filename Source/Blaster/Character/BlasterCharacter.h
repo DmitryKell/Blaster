@@ -44,11 +44,15 @@ public:
 	void MulticastEliminated();
 	
 	void Eliminated();
+	UPROPERTY(Replicated)
+	bool bDisableGameplay = false;
+
 	
 protected:
 	UFUNCTION()
 	void ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* InstigatorController, AActor* DamageCauser);
 	void UpdateHUDHealth();
+	void RotateInPlace(float DeltaTime);
 	// Poll for any relevant classes 
 	void PollInit();
 protected:
@@ -216,7 +220,8 @@ public:
 	FORCEINLINE UCameraComponent* GetCameraComponent() { return FollowCamera; }
 	FORCEINLINE bool ShouldRotateRootBone() { return bRotateRootBone; }
 	FORCEINLINE bool IsElimmed() const { return bElimmed; }
-	FORCEINLINE float GetHealth() const {return Health;}
-	FORCEINLINE float GetMaxHealth() const {return MaxHealth;}
+	FORCEINLINE float GetHealth() const { return Health; }
+	FORCEINLINE float GetMaxHealth() const {return MaxHealth; }
+	FORCEINLINE UCombatComponent* GetCombatComponent() const { return CombatComponent; }
 	ECombatState GetCombatState() const;
 };

@@ -4,11 +4,14 @@
 #include "CharacterOverlay.h"
 #include "Blueprint/UserWidget.h"
 #include "GameFramework/PlayerController.h"
+#include "Announcement.h"
+
+
 
 void ABlasterHUD::BeginPlay()
 {
 	Super::BeginPlay();
-	AddCharacterOverlay();
+
 }
 
 void ABlasterHUD::AddCharacterOverlay()
@@ -18,8 +21,16 @@ void ABlasterHUD::AddCharacterOverlay()
 	{
 		CharacterOverlay = CreateWidget<UCharacterOverlay>(PlayerController, CharacterOverlayClass);
 		CharacterOverlay->AddToViewport();
-		
-		
+	}
+}
+
+void ABlasterHUD::AddAnnouncementOverlay()
+{
+	APlayerController* PlayerController = GetOwningPlayerController();
+	if (PlayerController && AnnouncementOverlayClass)
+	{
+		AnnouncementOverlay = CreateWidget<UAnnouncement>(PlayerController, AnnouncementOverlayClass);
+		AnnouncementOverlay->AddToViewport();
 	}
 }
 
@@ -70,3 +81,4 @@ void ABlasterHUD::DrawCrosshair(UTexture2D* ToTexture, FVector2D ViewportCenter,
 	const FVector2D TextureDrawPoint(ViewportCenter.X - (TextureWidth / 2 ) + Spread.X, ViewportCenter.Y - (TextureHeight / 2) + Spread.Y);
 	DrawTexture(ToTexture, TextureDrawPoint.X, TextureDrawPoint.Y, TextureWidth, TextureHeight, 0.f, 0.f, 1.f, 1.f, CrosshairsColor);
 }
+
