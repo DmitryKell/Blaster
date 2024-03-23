@@ -33,6 +33,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere)
+	float Damage = 20.f;
 private:
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* CollisionBox;

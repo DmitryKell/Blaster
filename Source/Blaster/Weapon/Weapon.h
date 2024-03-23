@@ -116,7 +116,6 @@ private:
 	void OnRep_Ammo();
 
 	void SpendRound();
-	
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	int32 MagCapacity;
 	
@@ -133,7 +132,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	bool bAutomaticFire = true;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	EWeaponType WeaponType;
 	
 

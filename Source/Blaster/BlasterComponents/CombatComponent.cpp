@@ -68,6 +68,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 void UCombatComponent::InitializeCarriedAmmo()
 {
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_AssaultRifle, StartingAR_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_RocketLauncher, StartingRocketLauncher_Ammo);
 }
 
 void UCombatComponent::InterpFOV(float DeltaTime)
@@ -243,6 +244,7 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	if (BlasterPlayerController && EquippedWeapon)
 	{
 		BlasterPlayerController->SetHUDCarriedAmmo(CarriedAmmo);
+		
 		// Sets on Server
 		FString WeaponTypeText = GetNameOfWeaponType(EquippedWeapon->GetWeaponType());
 		BlasterPlayerController->SetWeaponTypeText(WeaponTypeText);
