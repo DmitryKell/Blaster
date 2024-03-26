@@ -8,23 +8,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38cf7813-65dc-4222-8b1b-fa81f31d7958" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/FX/MI_TrailSmoke.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/FX/M_TrailSmoke.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/FX/NE_TrailSmokeEmitter.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_RocketLauncher.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_Rocket.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_Pistol.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/HitScan/BP_HitScanPistol.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectilePistolBullet.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileRifleBullet.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/HitScanWeapon.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/RocketMovementComponent.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/RocketMovementComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Blaster/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Blaster/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Sound/RocketLauncher/Cues/RocketLauncher_InAirLoop_Cue.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Sound/RocketLauncher/Cues/RocketLauncher_InAirLoop_Cue.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Rocket_Launcher_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Rocket_Launcher_A_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/GameModes/BP_BlasterGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/GameModes/BP_BlasterGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileBullet.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileBullet.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Pistols_A.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Pistols_A.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Pistols_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Pistols_A_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/FX/NS_TrailSmoke.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/FX/NS_TrailSmoke.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_AssaultRifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_AssaultRifle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileBullet.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_Rocket.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_Rocket.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BlasterMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BlasterMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Blaster.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Blaster.Build.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/PlayerController/BlasterPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/PlayerController/BlasterPlayerController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileBullet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileBullet.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileBullet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileBullet.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/WeaponTypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/WeaponTypes.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +43,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://D:/UnrealProjects/Blaster/Source/Blaster/Blaster.Build.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -190,12 +205,18 @@
       <workItem from="1710259817198" duration="802000" />
       <workItem from="1711007172793" duration="170000" />
       <workItem from="1711111625167" duration="6839000" />
+      <workItem from="1711199438673" duration="369000" />
+      <workItem from="1711199895859" duration="5210000" />
+      <workItem from="1711274525121" duration="4827000" />
+      <workItem from="1711347704479" duration="4488000" />
+      <workItem from="1711456241688" duration="5095000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

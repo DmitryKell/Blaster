@@ -69,6 +69,7 @@ void UCombatComponent::InitializeCarriedAmmo()
 {
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_AssaultRifle, StartingAR_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_RocketLauncher, StartingRocketLauncher_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_Pistol, StartingPistol_Ammo);
 }
 
 void UCombatComponent::InterpFOV(float DeltaTime)
@@ -485,7 +486,13 @@ FString UCombatComponent::GetNameOfWeaponType(EWeaponType WeaponType)
 	switch (WeaponType)
 	{
 	case EWeaponType::EWT_AssaultRifle:
-		Text = "AssaultRifle";
+		Text = "Assault Rifle";
+		return Text;
+	case EWeaponType::EWT_RocketLauncher:
+		Text = "Rocket Launcher";
+		return Text;
+	case EWeaponType::EWT_Pistol:
+		Text = "Pistol";
 		return Text;
 	}
 	return "";
