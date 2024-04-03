@@ -216,7 +216,7 @@ public:
 	 FORCEINLINE ETurningInPlace GetTurningInPlaceEnum() const { return TurningInPlace;}
 	 AWeapon* GetEquippedWeapon();
 	
-	FVector GetHitTarget() const ;
+	FVector GetHitTarget() const;
 	FORCEINLINE UCameraComponent* GetCameraComponent() { return FollowCamera; }
 	FORCEINLINE bool ShouldRotateRootBone() { return bRotateRootBone; }
 	FORCEINLINE bool IsElimmed() const { return bElimmed; }
@@ -224,4 +224,6 @@ public:
 	FORCEINLINE float GetMaxHealth() const {return MaxHealth; }
 	FORCEINLINE UCombatComponent* GetCombatComponent() const { return CombatComponent; }
 	ECombatState GetCombatState() const;
+
+
 };

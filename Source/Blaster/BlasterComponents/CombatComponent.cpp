@@ -69,7 +69,9 @@ void UCombatComponent::InitializeCarriedAmmo()
 {
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_AssaultRifle, StartingAR_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_RocketLauncher, StartingRocketLauncher_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_Submachine, StartingSubMachine_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_Pistol, StartingPistol_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_Shotgun, StartingShotgun_Ammo);
 }
 
 void UCombatComponent::InterpFOV(float DeltaTime)
@@ -494,6 +496,21 @@ FString UCombatComponent::GetNameOfWeaponType(EWeaponType WeaponType)
 	case EWeaponType::EWT_Pistol:
 		Text = "Pistol";
 		return Text;
+	case EWeaponType::EWT_Submachine:
+		Text = "Submachine";
+		return Text;
+	case EWeaponType::EWT_Shotgun:
+		Text = "Shotgun";
+		return Text;
 	}
 	return "";
+}
+
+void UCombatComponent::AddPitchRecoil(float Value)
+{
+	if (Character && Character->GetEquippedWeapon())
+	{
+		float ValueStrength = Value * Character->GetEquippedWeapon()->GetPitchRecoilStrength();
+		Character->AddControllerPitchInput(ValueStrength);
+	}
 }

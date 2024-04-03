@@ -141,7 +141,13 @@ private:
 	int32 StartingRocketLauncher_Ammo = 5;
 
 	UPROPERTY(EditAnywhere)
+	int32 StartingSubMachine_Ammo = 60;
+	
+	UPROPERTY(EditAnywhere)
 	int32 StartingPistol_Ammo = 35;
+
+	UPROPERTY(EditAnywhere)
+	int32 StartingShotgun_Ammo = 20;
 	
 	void InitializeCarriedAmmo();
 
@@ -154,4 +160,12 @@ private:
 	int32 AmountToReload();
 	
 	FString GetNameOfWeaponType(EWeaponType WeaponType);
+
+#pragma region  Recoil
+public:
+	void AddPitchRecoil(float Value);
+	void AddYawRecoil(float Value);
+
+	
+#pragma endregion 
 };

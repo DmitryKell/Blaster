@@ -41,6 +41,13 @@ protected:
 private:
 	
 	float CountDownTime = 0.f;
+	
+	UPROPERTY()
+	AActor* FirstPlayerStart;
+	
+	UPROPERTY()
+	AActor* SecondPlayerStart;
+
 public:
 	FORCEINLINE float GetCountDownTime() const { return  CountDownTime; }
 };

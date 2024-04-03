@@ -7,6 +7,7 @@
 #include "Blaster/Weapon/WeaponTypes.h"
 #include "Weapon.generated.h"
 
+class UTimelineComponent;
 class USoundCue;
 class ACasing;
 class USphereComponent;
@@ -135,9 +136,17 @@ private:
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	EWeaponType WeaponType;
 	
+	UPROPERTY(EditAnywhere, Category = WeaponProperties)
+	float PitchRecoilStrength;
 
 #pragma endregion
+#pragma region Recoil
+	
+	UPROPERTY(VisibleAnywhere)
+	UTimelineComponent* TimelineComponent;
 
+	// add timeline for recoil, and test replication on all machines 
+#pragma endregion 
 public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE USphereComponent* GetWeaponSphereComponent() const { return AreaSphere; }
@@ -155,5 +164,6 @@ public:
 	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
 	
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+	FORCEINLINE float GetPitchRecoilStrength() const { return PitchRecoilStrength; }
 	bool IsEmpty();
 };

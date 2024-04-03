@@ -20,5 +20,8 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	TSubclassOf<AProjectile> Projectile;
+	
+	UPROPERTY(EditAnywhere, Category = WeaponProperties)
+	float ScatterAmount = 1;
 
 };
