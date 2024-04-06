@@ -16,7 +16,7 @@ class BLASTER_API AProjectileWeapon : public AWeapon
 	GENERATED_BODY()
 public:
 	virtual void Fire(const FVector& HitTarget) override;
-
+	
 private:
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	TSubclassOf<AProjectile> Projectile;
@@ -24,4 +24,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	float ScatterAmount = 1;
 
+	UPROPERTY()
+    APawn* InstigatorPawn;
+	
+    public:
+	
+    APawn* GetInstPawn() { return InstigatorPawn; }
 };

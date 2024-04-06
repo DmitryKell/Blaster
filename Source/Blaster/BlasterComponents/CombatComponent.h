@@ -148,6 +148,12 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	int32 StartingShotgun_Ammo = 20;
+
+	UPROPERTY(EditAnywhere)
+	int32 StartingSniperRifle_Ammo = 6;
+	
+	UPROPERTY(EditAnywhere)
+	int32 StartingGrenadeLauncher_Ammo = 6;
 	
 	void InitializeCarriedAmmo();
 
@@ -164,7 +170,7 @@ private:
 #pragma region  Recoil
 public:
 	void AddPitchRecoil(float Value);
-	void AddYawRecoil(float Value);
+	
 
 	
 #pragma endregion 

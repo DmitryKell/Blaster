@@ -4,37 +4,30 @@
 
 #include "CoreMinimal.h"
 #include "Weapon.h"
-#include "ProjectileShotgun.generated.h"
+#include "NA_RecoilProjectileWeapon.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BLASTER_API AProjectileShotgun : public AWeapon
+class BLASTER_API ANA_RecoilProjectileWeapon : public AWeapon
 {
 	GENERATED_BODY()
-protected:
-	
+public:
 	virtual void Fire(const FVector& HitTarget) override;
-	void SpawnProjectile(const FVector& HitTarget);
+
 private:
-	
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	TSubclassOf<class AProjectile> Projectile;
 	
-	int CurrentProjectilesAmount = 0;
-	
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
-	int ProjectilesAmount = 5;
-	
-	UPROPERTY(EditAnywhere, Category = WeaponProperties)
-	float ScatterAmount = 1.f;
-	
+	float ScatterAmount = 1;
+
 	UPROPERTY(EditAnywhere, Category = Recoil)
 	float RecoilPitchStrength = -1;
 	
 	UPROPERTY(EditAnywhere, Category = Recoil)
 	float RecoilYawStrength = 1;
 
-	void SimulateRecoil();
+	void SimulateRecoil(APawn* InstigatorPawn);
 };

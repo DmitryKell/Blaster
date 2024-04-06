@@ -37,7 +37,9 @@ public:
 	void ShowPickupWidget(bool bShowWidget);
 	virtual void OnRep_Owner() override;
 	virtual void Fire(const FVector& HitTarget);
-
+	virtual void OnReload();
+	virtual void OnFireButtonPressed(bool bPressed);
+	
 	UFUNCTION()
 	void OnRep_WeaponState();
 	void Dropped();
@@ -135,18 +137,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = WeaponProperties)
 	EWeaponType WeaponType;
-	
-	UPROPERTY(EditAnywhere, Category = WeaponProperties)
-	float PitchRecoilStrength;
 
 #pragma endregion
-#pragma region Recoil
-	
-	UPROPERTY(VisibleAnywhere)
-	UTimelineComponent* TimelineComponent;
 
-	// add timeline for recoil, and test replication on all machines 
-#pragma endregion 
 public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE USphereComponent* GetWeaponSphereComponent() const { return AreaSphere; }
@@ -164,6 +157,7 @@ public:
 	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
 	
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
-	FORCEINLINE float GetPitchRecoilStrength() const { return PitchRecoilStrength; }
 	bool IsEmpty();
+
+	
 };

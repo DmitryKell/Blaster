@@ -220,8 +220,6 @@ void AWeapon::ShowPickupWidget(bool bShowWidget)
 	}
 }
 
-
-
 void AWeapon::Fire(const FVector& HitTarget)
 {
 	if (FireAnimation && WeaponMesh)
@@ -249,4 +247,12 @@ void AWeapon::Fire(const FVector& HitTarget)
 bool AWeapon::IsEmpty()
 {
 	return Ammo <= 0;
+}
+
+void AWeapon::OnReload()
+{
+}
+
+void AWeapon::OnFireButtonPressed(bool bPressed)
+{
 }

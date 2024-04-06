@@ -1,30 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "ProjectileShotgun.h"
+#include "NA_RecoilProjectileWeapon.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "Projectile.h"
 #include "Kismet/KismetMathLibrary.h"
 
-void AProjectileShotgun::Fire(const FVector& HitTarget)
+void ANA_RecoilProjectileWeapon::Fire(const FVector& HitTarget)
 {
 	Super::Fire(HitTarget);
-	
-	while (CurrentProjectilesAmount != ProjectilesAmount)
-	{
-		SpawnProjectile(HitTarget);
-		CurrentProjectilesAmount++;
-	}
-	if (CurrentProjectilesAmount == ProjectilesAmount)
-	{
-		CurrentProjectilesAmount = 0;
-	}
-	SimulateRecoil();
-}
- 
-void AProjectileShotgun::SpawnProjectile(const FVector& HitTarget)
-{
+
 	if (!HasAuthority()) return;
-	
+
 	APawn* InstigatorPawn = Cast<APawn>(GetOwner());
 
 	const USkeletalMeshSocket* MuzzleFlashSocket = GetWeaponMesh()->GetSocketByName(FName("MuzzleFlash"));
@@ -32,16 +18,16 @@ void AProjectileShotgun::SpawnProjectile(const FVector& HitTarget)
 	if (MuzzleFlashSocket && InstigatorPawn)
 	{
 		FTransform SocketTransform = MuzzleFlashSocket->GetSocketTransform(GetWeaponMesh());
-
-		//From MuzzleFlash socket to HitLocation From TraceUnderCrosshair
-
-		// Calculate spread
+		
 		FRotator RandomRotation = FRotator(FMath::RandRange(-ScatterAmount, ScatterAmount), FMath::RandRange(-ScatterAmount, ScatterAmount), 0.0f);
 		
+		//From MuzzleFlash socket to HitLocation From TraceUnderCrosshair
+
 		FVector ToTarget = HitTarget - SocketTransform.GetLocation();
 		
-		// Apply the random rotation to the target rotation
+		// Apply the amount of rotation to the target rotation
 		FRotator TargetRotation = (ToTarget.Rotation() + RandomRotation);
+		
 		if (Projectile)
 		{
 			FActorSpawnParameters SpawnParameters;
@@ -50,18 +36,19 @@ void AProjectileShotgun::SpawnProjectile(const FVector& HitTarget)
 			SpawnParameters.Instigator = InstigatorPawn;
 
 			UWorld* World = GetWorld();
-		
 			if (World)
 			{
 				World->SpawnActor<AProjectile>(Projectile, SocketTransform.GetLocation(), TargetRotation, SpawnParameters);
 			}
 		}
+		SimulateRecoil(InstigatorPawn);
 	}
 }
 
-void AProjectileShotgun::SimulateRecoil()
+void ANA_RecoilProjectileWeapon::SimulateRecoil(APawn* InstigatorPawn)
 {
-	APawn* InstigatorPawn = Cast<APawn>(GetOwner());
+	if (InstigatorPawn == nullptr) return;
+	
 	float Pitch = UKismetMathLibrary::RandomFloatInRange(0.9, 1);
 	float Yaw = UKismetMathLibrary::RandomFloatInRange(-1, 1);
 
@@ -70,5 +57,4 @@ void AProjectileShotgun::SimulateRecoil()
 		InstigatorPawn->AddControllerPitchInput(Pitch * RecoilPitchStrength);
 		InstigatorPawn->AddControllerPitchInput(Yaw * RecoilYawStrength);
 	}
-
 }

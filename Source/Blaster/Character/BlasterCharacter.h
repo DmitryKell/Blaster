@@ -38,6 +38,9 @@ public:
 	void PlayElimMontage();
 	void PlayReloadMontage();
 	
+	UFUNCTION(BlueprintImplementableEvent)
+	void ShowSniperScopeWidget(bool bShowWidget);
+	
 	void Calculate_AO_Pitch();
 	
 	UFUNCTION(Reliable, NetMulticast)

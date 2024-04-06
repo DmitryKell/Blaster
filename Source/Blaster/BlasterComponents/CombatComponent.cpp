@@ -72,6 +72,8 @@ void UCombatComponent::InitializeCarriedAmmo()
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_Submachine, StartingSubMachine_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_Pistol, StartingPistol_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_Shotgun, StartingShotgun_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_SniperRifle, StartingSniperRifle_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_GrenadeLauncher, StartingGrenadeLauncher_Ammo);
 }
 
 void UCombatComponent::InterpFOV(float DeltaTime)
@@ -297,12 +299,19 @@ void UCombatComponent::OnRep_Weapon()
 
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
+	if (Character == nullptr || EquippedWeapon == nullptr) return;
+	
 	bAiming = bIsAiming;
 	//bShrinkWhenAimingAtCharacter = false;
 	ServerSetAiming(bIsAiming);
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+	}
+	
+	if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
+	{
+		Character->ShowSniperScopeWidget(bIsAiming);
 	}
 }
 
@@ -323,6 +332,8 @@ void UCombatComponent::FireButtonPressed(bool bPressed)
 	{
 		Fire();
 	}
+	if (EquippedWeapon == nullptr || Character == nullptr) return;
+	EquippedWeapon->OnFireButtonPressed(bFireButtonPressed);
 }
 
 void UCombatComponent::Fire()
@@ -403,6 +414,7 @@ void UCombatComponent::Reload()
 void UCombatComponent::HandleReload()
 {
 	Character->PlayReloadMontage();
+	EquippedWeapon->OnReload();
 }
 
 void UCombatComponent::ServerReload_Implementation()
@@ -502,15 +514,13 @@ FString UCombatComponent::GetNameOfWeaponType(EWeaponType WeaponType)
 	case EWeaponType::EWT_Shotgun:
 		Text = "Shotgun";
 		return Text;
+	case EWeaponType::EWT_SniperRifle:
+		Text = "Sniper Rifle";
+		return Text;
+	case EWeaponType::EWT_GrenadeLauncher:
+		Text = "Grenade Launcher";
+		return Text;
 	}
 	return "";
 }
 
-void UCombatComponent::AddPitchRecoil(float Value)
-{
-	if (Character && Character->GetEquippedWeapon())
-	{
-		float ValueStrength = Value * Character->GetEquippedWeapon()->GetPitchRecoilStrength();
-		Character->AddControllerPitchInput(ValueStrength);
-	}
-}
