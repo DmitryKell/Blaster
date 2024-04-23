@@ -8,38 +8,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38cf7813-65dc-4222-8b1b-fa81f31d7958" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Assets/MinecraftSkins/MySkin.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/SniperScope/BlkBG1920x1080.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/SniperScope/SniperScopeNoBG.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/HUD/WBP_SniperRifleScope.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_GrenadeLauncher.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_RecoilAssaultRifle.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_SniperRifle.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_Grenade.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_ProjectileSniperRifleButtler.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilAssaultRifle.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilPistol.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilSniperRifle.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/RecoilCurve/RifleCurve.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/VectorTestCurve.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/Projectiles/BP_Grenade_Class.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Blaster/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Blaster/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Grenade_Launcher_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Grenade_Launcher_A_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Sniper_Rifle_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Sniper_Rifle_A_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/EpicCharacterAnimations/AnimStarterPack/Reload_Pistol.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/EpicCharacterAnimations/AnimStarterPack/Reload_Pistol.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter_Optimized.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter_Optimized.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter_Skeleton.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Character/Animations/ABP_Blaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Character/Animations/ABP_Blaster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Character/Animations/Reload.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Character/Animations/Reload.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Character/BP_BlasterCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Character/BP_BlasterCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_Shotgun.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_Shotgun.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_GrenadeLauncher.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/BP_GrenadeLauncher.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilAssaultRifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilAssaultRifle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilSubmachineGun.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/BP_RecoilSubmachineGun.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/RecoilCurve/RifleCurve.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/RecoilCurve/RifleCurve.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/RecoilCurve/SMG_Curve.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints_/Weapon/RecoilWeapon/RecoilCurve/SMG_Curve.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/FPS_Weapon_Bundle/Weapons/Materials/G67_Grenade/M_G67.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FPS_Weapon_Bundle/Weapons/Materials/G67_Grenade/M_G67.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/FPS_Weapon_Bundle/Weapons/Materials/Master_Material/M_Weapon_Master_USE.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/FPS_Weapon_Bundle/Weapons/Materials/Master_Material/M_Weapon_Master_USE.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BlasterMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BlasterMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/BlasterComponents/CombatComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/BlasterTypes/CombatState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/BlasterTypes/CombatState.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Character/BlasterAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Character/BlasterAnimInstance.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Character/BlasterCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileShotgun.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileShotgun.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileShotgun.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileShotgun.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileWeapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Weapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/WeaponTypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/WeaponTypes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/Projectile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/ProjectileRocket.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Blaster/Weapon/RecoilProjectileWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Blaster/Weapon/RecoilProjectileWeapon.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,28 +58,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.space",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Дима\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Дима\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Дима\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Дима\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Дима\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Дима\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Blaster" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -230,6 +227,20 @@
       <workItem from="1712401970984" duration="2762000" />
       <workItem from="1712407033016" duration="820000" />
       <workItem from="1712418694872" duration="9712000" />
+      <workItem from="1712473597959" duration="537000" />
+      <workItem from="1712487159614" duration="1192000" />
+      <workItem from="1712499121079" duration="2673000" />
+      <workItem from="1712555274183" duration="2887000" />
+      <workItem from="1712567167687" duration="923000" />
+      <workItem from="1712588340976" duration="881000" />
+      <workItem from="1713168716050" duration="7464000" />
+      <workItem from="1713454633128" duration="2183000" />
+      <workItem from="1713679822288" duration="1503000" />
+      <workItem from="1713687781621" duration="335000" />
+      <workItem from="1713763350791" duration="6864000" />
+      <workItem from="1713788710667" duration="1243000" />
+      <workItem from="1713848445731" duration="5837000" />
+      <workItem from="1713856173858" duration="10588000" />
     </task>
     <servers />
   </component>

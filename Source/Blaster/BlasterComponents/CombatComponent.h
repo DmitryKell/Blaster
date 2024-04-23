@@ -28,15 +28,22 @@ public:
 	void Reload();
 	
 	void EquipWeapon(AWeapon* WeaponToEquip);
+
 	UFUNCTION()
 	void OnRep_Weapon();
+	
+	UFUNCTION(BlueprintCallable)
+	void LaunchGrenade();
+	
+	UFUNCTION(BlueprintCallable)
+	void FinishThrowingGrenade();
 	
 	UFUNCTION(BlueprintCallable)
 	void FinishReloading();
 
 	UFUNCTION(BlueprintCallable)
 	void UpdateAmmoValues();
-
+	
 	void FireButtonPressed(bool bPressed);
 protected:
 	virtual void BeginPlay() override;
@@ -62,6 +69,17 @@ protected:
 
 	void SetHUDCrosshairs(float DeltaTime);
 
+	void ThrowGrenade();
+	UFUNCTION(Server, Reliable)
+	void ServerThrowGrenade();
+
+	void DropEquippedWeapon();
+	void AttachActorToRightHand(AActor* ActorToAttach);
+	void AttachActorToLeftHand(AActor* ActorToAttach);
+	void UpdateCarriedAmmo();
+	void PlayEquipWeaponSound();
+	void ReloadEmptyWeapon();
+	void ShowAttachedGrenade(bool bShow);
 private:
 	UPROPERTY(Replicated)
 	bool bAiming;

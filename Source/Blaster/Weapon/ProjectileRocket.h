@@ -24,8 +24,6 @@ protected:
 	virtual void ServerOnHit_Implementation(FHitResult Hit) override;
 	virtual void MulticastOnHit_Implementation(FHitResult Hit) override;
 
-	void DestroyTimerFinished();
-
 	UPROPERTY(EditAnywhere)
 	USoundCue* ProjectileLoop;
 
@@ -36,23 +34,7 @@ protected:
 	class USoundAttenuation* LoopingSoundAttenuation;
 	
 private:
-	UPROPERTY(VisibleAnywhere)
-	class URocketMovementComponent* RocketMovementComponent;
-	
-	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* RocketComponent;
-	
-	UPROPERTY(EditAnywhere)
-	class UNiagaraSystem* TrailSystem;
-	
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties")
-	float DamageInnerRadius = 100.f;
-	
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties")
-	float DamageOuterRadius = 500.f;
 
-	FTimerHandle DestroyTimer;
+
 	
-	UPROPERTY(EditAnywhere)
-	float DestroyTrailTime = 3.f;
 };

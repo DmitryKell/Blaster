@@ -50,6 +50,27 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere)
 	UProjectileMovementComponent* ProjectileMovementComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* ProjectileComponent;
+	
+	UPROPERTY(EditAnywhere)
+	class UNiagaraSystem* TrailSystem;
+
+	void SpawnTrailSystem();
+
+	void StartDestroyedTimer();
+	virtual void DestroyTimerFinished();
+	void ExplodeDamage();
+	
+	UPROPERTY(VisibleAnywhere)
+	class URocketMovementComponent* RocketMovementComponent;
+	
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties")
+	float DamageInnerRadius = 100.f;
+	
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties")
+	float DamageOuterRadius = 500.f;
 private:
 	
 	UPROPERTY(EditAnywhere, Category = Particles)
@@ -58,5 +79,8 @@ private:
 	UPROPERTY(EditAnywhere)
 	UParticleSystemComponent* TracerComponent;
 
-
+	FTimerHandle DestroyTimer;
+	
+	UPROPERTY(EditAnywhere)
+	float DestroyTrailTime = 0.01f;
 };

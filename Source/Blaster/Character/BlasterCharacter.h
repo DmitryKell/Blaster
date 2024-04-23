@@ -37,7 +37,7 @@ public:
 	void PlayHitReactMontage();
 	void PlayElimMontage();
 	void PlayReloadMontage();
-	
+	void PlayThrowGrenadeMontage();
 	UFUNCTION(BlueprintImplementableEvent)
 	void ShowSniperScopeWidget(bool bShowWidget);
 	
@@ -58,6 +58,7 @@ protected:
 	void RotateInPlace(float DeltaTime);
 	// Poll for any relevant classes 
 	void PollInit();
+	
 protected:
 	virtual void BeginPlay() override;
 	
@@ -85,6 +86,8 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
 
+	void GrenadeButtonPressed();
+	
 	void TurnInPlace(float DeltaTime);
 
 	void HideCharacterIfCharacterClose();
@@ -153,6 +156,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	UAnimMontage* ReloadMontage;
 	
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	UAnimMontage* ThrowGrenadeMontage;
 	/*
 	 * Montages
 	 */
@@ -204,11 +209,18 @@ private:
 
 	UPROPERTY()
 	ABlasterPlayerState* BlasterPlayerState;
-#pragma endregion
 	
+#pragma endregion
 	
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
+
+	/*
+	 * Grenades
+	 */
+	
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* AttachedGrenade;
 public:
 	 void SetOverlappingItem(AWeapon* Weapon);
 	 bool IsWeaponEquipped();
@@ -226,6 +238,7 @@ public:
 	FORCEINLINE float GetHealth() const { return Health; }
 	FORCEINLINE float GetMaxHealth() const {return MaxHealth; }
 	FORCEINLINE UCombatComponent* GetCombatComponent() const { return CombatComponent; }
+	FORCEINLINE UStaticMeshComponent* GetGrenadeComponent() const { return AttachedGrenade; }
 	ECombatState GetCombatState() const;
 
 

@@ -12,9 +12,9 @@
 
 AProjectileRocket::AProjectileRocket()
 {
-	RocketComponent = CreateDefaultSubobject<UStaticMeshComponent>("RocketMesh");
-	RocketComponent->SetupAttachment(RootComponent);
-	RocketComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ProjectileComponent = CreateDefaultSubobject<UStaticMeshComponent>("RocketMesh");
+	ProjectileComponent->SetupAttachment(RootComponent);
+	ProjectileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	RocketMovementComponent = CreateDefaultSubobject<URocketMovementComponent>("ProjectileRocketMovementComponent");
 	RocketMovementComponent->bRotationFollowsVelocity = true;
 	RocketMovementComponent->SetIsReplicated(true);
@@ -23,11 +23,7 @@ AProjectileRocket::AProjectileRocket()
 void AProjectileRocket::BeginPlay()
 {
 	Super::BeginPlay();
-	if (TrailSystem)
-	{
-		UNiagaraFunctionLibrary::SpawnSystemAttached(TrailSystem, GetRootComponent(), FName(""),
-			GetActorLocation(), GetActorRotation(), EAttachLocation::KeepWorldPosition, false);
-	}
+	SpawnTrailSystem();
 	
 	if (ProjectileLoop && LoopingSoundAttenuation)
 	{
@@ -49,24 +45,10 @@ void AProjectileRocket::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAc
 	{
 		return;
 	}
-	APawn* FiringPawn = GetInstigator();
-	
-	if (FiringPawn && HasAuthority())
-	{
-		AController* FiringController = FiringPawn->GetController();
-		if (FiringController)
-		{
-			UGameplayStatics::ApplyRadialDamageWithFalloff(this,
-
-			Damage, 10.f, GetActorLocation(),
-				DamageInnerRadius, DamageOuterRadius, 1.f,
-				UDamageType::StaticClass(), TArray<AActor*>(), this, FiringController);
-		}
-	}
+	ExplodeDamage();
 	
 	ServerOnHit(Hit);
-	GetWorld()->GetTimerManager().SetTimer(DestroyTimer, this, &AProjectileRocket::DestroyTimerFinished, DestroyTrailTime);
-
+	StartDestroyedTimer();
 	if (ProjectileLoopComponent && ProjectileLoopComponent->IsPlaying())
 	{
 		ProjectileLoopComponent->Stop();
@@ -100,9 +82,9 @@ void AProjectileRocket::MulticastOnHit_Implementation(FHitResult Hit)
 		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
 	}
 
-	if (RocketComponent)
+	if (ProjectileComponent)
 	{
-		RocketComponent->DestroyComponent();
+		ProjectileComponent->DestroyComponent();
 	}
 	
 	if (CollisionBox)
@@ -111,9 +93,5 @@ void AProjectileRocket::MulticastOnHit_Implementation(FHitResult Hit)
 	}
 }
 
-void AProjectileRocket::DestroyTimerFinished()
-{
-	Destroy();
-}
-
+// біполярній йон
 
