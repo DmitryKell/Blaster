@@ -46,7 +46,6 @@ ABlasterCharacter::ABlasterCharacter()
 	AttachedGrenade = CreateDefaultSubobject<UStaticMeshComponent>("GrenadeMesh");
 	AttachedGrenade->SetupAttachment(GetMesh(), FName("Grenade"));
 	AttachedGrenade->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
 	
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetCollisionObjectType(ECC_SkeletalMesh);
@@ -239,6 +238,8 @@ void ABlasterCharacter::Jump()
 void ABlasterCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
                                       AController* InstigatorController, AActor* DamageCauser)
 {
+	if (bElimmed) return;
+	
 	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
 	PlayHitReactMontage();
 	UpdateHUDHealth();
@@ -406,6 +407,9 @@ void ABlasterCharacter::PlayReloadMontage()
 			SectionName = FName("Rifle");
 			break;
 		case EWeaponType::EWT_GrenadeLauncher:
+			SectionName = FName("Rifle");
+			break;
+		case EWeaponType::EWT_AR_SO:
 			SectionName = FName("Rifle");
 			break;
 		}

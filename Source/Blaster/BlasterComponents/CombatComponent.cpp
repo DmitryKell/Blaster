@@ -14,6 +14,7 @@
 #include "Camera/CameraComponent.h"
 #include "Engine/Texture2D.h"
 #include "Sound/SoundCue.h"
+#include "Blaster/Weapon/Projectile.h"
 #include "TimerManager.h"
 
 UCombatComponent::UCombatComponent()
@@ -63,6 +64,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UCombatComponent, bAiming)
 	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedAmmo, COND_OwnerOnly);
 	DOREPLIFETIME(UCombatComponent, CombatState)
+	DOREPLIFETIME(UCombatComponent, Grenades);
 }
 
 void UCombatComponent::InitializeCarriedAmmo()
@@ -74,6 +76,7 @@ void UCombatComponent::InitializeCarriedAmmo()
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_Shotgun, StartingShotgun_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_SniperRifle, StartingSniperRifle_Ammo);
 	CarriedAmmoMap.Emplace(EWeaponType::EWT_GrenadeLauncher, StartingGrenadeLauncher_Ammo);
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_AR_SO, Starting_AR_SO);
 }
 
 void UCombatComponent::InterpFOV(float DeltaTime)
@@ -324,8 +327,6 @@ void UCombatComponent::ReloadEmptyWeapon()
 	}
 }
 
-
-
 // replicate to clients
 void UCombatComponent::OnRep_Weapon()
 {
@@ -351,6 +352,10 @@ void UCombatComponent::OnRep_Weapon()
 void UCombatComponent::LaunchGrenade()
 {
 	ShowAttachedGrenade(false);
+	if (Character && Character->IsLocallyControlled())
+	{
+		ServerLaunchGrenade(HitTarget);
+	}
 }
 
 
@@ -474,7 +479,8 @@ void UCombatComponent::HandleReload()
 
 void UCombatComponent::ThrowGrenade()
 {
-	if (CombatState != ECombatState::ECS_Unoccupied) return;
+	if (Grenades == 0) return;
+	if (CombatState != ECombatState::ECS_Unoccupied || EquippedWeapon == nullptr) return;
 	
 	CombatState = ECombatState::ECS_ThrowingGrenade;
 	if (Character)
@@ -488,13 +494,50 @@ void UCombatComponent::ThrowGrenade()
 	{
 		ServerThrowGrenade();
 	}
-	
+	if (Character && Character->HasAuthority())
+	{
+		Grenades = FMath::Clamp(Grenades - 1, 0, MaxGrenades);
+		UpdateHUDGrenades();
+	}
 }
 
+void UCombatComponent::OnRep_Grenades()
+{
+	UpdateHUDGrenades();
+}
+
+void UCombatComponent::UpdateHUDGrenades()
+{
+	BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Character->Controller) : BlasterPlayerController;
+	if (BlasterPlayerController)
+	{
+		BlasterPlayerController->SetHUDGrenades(Grenades);
+	}
+}
+
+void UCombatComponent::ServerLaunchGrenade_Implementation(const FVector_NetQuantize& Target)
+{
+	if (Character  && GrenadeClass && Character->GetGrenadeComponent())
+	{
+		const FVector StartingLocation = Character->GetGrenadeComponent()->GetComponentLocation();
+		FVector ToTarget = Target - StartingLocation;
+		
+		FActorSpawnParameters SpawnParameters;
+		SpawnParameters.Owner = Character;
+		SpawnParameters.Instigator = Character;
+		
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			World->SpawnActor<AProjectile>(GrenadeClass, StartingLocation, ToTarget.Rotation(), SpawnParameters);
+		}
+	}
+}
 
 
 void UCombatComponent::ServerThrowGrenade_Implementation()
 {
+	if (Grenades == 0) return;
 	CombatState = ECombatState::ECS_ThrowingGrenade;
 	if (Character)
 	{
@@ -502,6 +545,8 @@ void UCombatComponent::ServerThrowGrenade_Implementation()
 		AttachActorToLeftHand(EquippedWeapon);
 		ShowAttachedGrenade(true);
 	}
+	Grenades = FMath::Clamp(Grenades - 1, 0, MaxGrenades);
+	UpdateHUDGrenades();
 }
 
 void UCombatComponent::ServerReload_Implementation()
@@ -628,7 +673,12 @@ FString UCombatComponent::GetNameOfWeaponType(EWeaponType WeaponType)
 	case EWeaponType::EWT_GrenadeLauncher:
 		Text = "Grenade Launcher";
 		return Text;
+	case EWeaponType::EWT_AR_SO:
+		Text = "AR_SO2";
+		return Text;
 	}
 	return "";
 }
+
+
 

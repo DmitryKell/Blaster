@@ -70,9 +70,16 @@ protected:
 	void SetHUDCrosshairs(float DeltaTime);
 
 	void ThrowGrenade();
+	
 	UFUNCTION(Server, Reliable)
 	void ServerThrowGrenade();
 
+	UFUNCTION(Server, Reliable)
+	void ServerLaunchGrenade(const FVector_NetQuantize& Target);
+	
+	UPROPERTY(EditAnywhere, Category = "Grenade")
+	TSubclassOf<class AProjectile> GrenadeClass;
+	
 	void DropEquippedWeapon();
 	void AttachActorToRightHand(AActor* ActorToAttach);
 	void AttachActorToLeftHand(AActor* ActorToAttach);
@@ -172,6 +179,9 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	int32 StartingGrenadeLauncher_Ammo = 6;
+
+	UPROPERTY(EditAnywhere)
+	int32 Starting_AR_SO = 80;
 	
 	void InitializeCarriedAmmo();
 
@@ -185,11 +195,16 @@ private:
 	
 	FString GetNameOfWeaponType(EWeaponType WeaponType);
 
-#pragma region  Recoil
-public:
-	void AddPitchRecoil(float Value);
-	
+	UPROPERTY(ReplicatedUsing = Onrep_Grenades)
+	int32 Grenades = 3;
 
+	UFUNCTION()
+	void OnRep_Grenades();
 	
-#pragma endregion 
+	UPROPERTY(EditAnywhere)
+	int32 MaxGrenades = 3;
+
+	void UpdateHUDGrenades();
+public:
+	FORCEINLINE int32 GetGrenades() const { return Grenades; }
 };

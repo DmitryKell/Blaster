@@ -21,6 +21,7 @@ public:
 	virtual void OnPossess(APawn* InPawn) override;
 	void SetHUDMatchCountDown(float CountDownTime);
 	void SetHUDAnnouncementCountdown(float CountdownTime);
+	void SetHUDGrenades(int32 Grenades);
 	void SetColorText();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	void OnMatchStateSet(FName State);
@@ -92,4 +93,5 @@ private:
 	float HUDMaxHealth;
 	float HUDScore;
 	int32 HUDDefeats;
+	int32 HUDGrenades;
 };
