@@ -17,6 +17,7 @@
 #include "Blaster/GameMode/BlasterGameMode.h"
 #include "Kismet/GameplayStatics.h"
 #include  "Blaster/PlayerState/BlasterPlayerState.h"
+#include "GameFramework/PlayerStart.h"
 #include "Particles/ParticleSystemComponent.h"
 
 ABlasterCharacter::ABlasterCharacter()
@@ -90,6 +91,7 @@ void ABlasterCharacter::PollInit()
 			BlasterPlayerState->AddElimText("");
 		}
 	}
+
 }
 
 void ABlasterCharacter::BeginPlay()
@@ -104,7 +106,43 @@ void ABlasterCharacter::BeginPlay()
 	{
 		AttachedGrenade->SetVisibility(false);
 	}
+	
+	FVector ReferenceLocation = GetActorLocation();
+	APlayerStart* ClosestPlayerStart = FindClosestPlayerStart(ReferenceLocation);
+	if (ClosestPlayerStart)
+	{
+		PlayerStart = ClosestPlayerStart;
+	}
+	if (PlayerStart == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(3, 2.f, FColor::Red, TEXT("Player Start is null ptr"), false);
+	}
+		
 }
+
+APlayerStart* ABlasterCharacter::FindClosestPlayerStart(const FVector& ReferenceLocation)
+{
+	TArray<AActor*> PlayerStarts;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerStart::StaticClass(), PlayerStarts);
+
+	APlayerStart* ClosestPlayerStart = nullptr;
+	float ClosestDistanceSquared = MAX_FLT;
+
+	for (AActor* Player_Start : PlayerStarts)
+	{
+		if (APlayerStart* CurrentPlayerStart = Cast<APlayerStart>(Player_Start))
+		{
+			const float DistanceSquared = FVector::DistSquared(CurrentPlayerStart->GetActorLocation(), ReferenceLocation);
+			if (DistanceSquared < ClosestDistanceSquared)
+			{
+				ClosestDistanceSquared = DistanceSquared;
+				ClosestPlayerStart = CurrentPlayerStart;
+			}
+		}
+	}
+	return ClosestPlayerStart;
+}
+
 
 void ABlasterCharacter::Tick(float DeltaTime)
 {

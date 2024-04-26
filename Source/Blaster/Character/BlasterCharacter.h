@@ -221,6 +221,14 @@ private:
 	
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* AttachedGrenade;
+
+	/*
+	 * PlayerStarts 
+	 */
+	UPROPERTY()
+	AActor* PlayerStart;
+
+	class APlayerStart* FindClosestPlayerStart(const FVector& ReferenceLocation);
 public:
 	 void SetOverlappingItem(AWeapon* Weapon);
 	 bool IsWeaponEquipped();
@@ -239,6 +247,8 @@ public:
 	FORCEINLINE float GetMaxHealth() const {return MaxHealth; }
 	FORCEINLINE UCombatComponent* GetCombatComponent() const { return CombatComponent; }
 	FORCEINLINE UStaticMeshComponent* GetGrenadeComponent() const { return AttachedGrenade; }
+	FORCEINLINE void SetPlayerStart(AActor* PlayerStartToSet) { PlayerStart = PlayerStartToSet; }
+	FORCEINLINE AActor* GetPlayerStart() const { return PlayerStart; }
 	ECombatState GetCombatState() const;
 
 
